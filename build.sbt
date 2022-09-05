@@ -2,8 +2,11 @@ ThisBuild / version := "0.1.0-SNAPSHOT"
 
 ThisBuild / scalaVersion := "3.2.0"
 
+ThisBuild / versionScheme := Some("early-semver")
+
+ThisBuild / githubWorkflowPublishTargetBranches := Seq()
+
 val commonSettings = Seq(
-  scalaVersion := "3.2.0",
   scalacOptions -= "-Xfatal-warnings",
   libraryDependencies ++= Seq(
     "org.typelevel" %% "cats-effect" % "3.3.14",
@@ -21,5 +24,6 @@ lazy val root = (project in file("."))
     name := "stevedore",
     idePackagePrefix := Some("com.tba"),
     publish := {},
+    publish / skip := true,
   )
   .aggregate(server, client, shared)

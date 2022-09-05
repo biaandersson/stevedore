@@ -6,7 +6,7 @@ package steve
 
 case class Build(
   base: Build.Base,
-  commands: List[Command],
+  commands: List[Build.Command],
 )
 
 object Build {

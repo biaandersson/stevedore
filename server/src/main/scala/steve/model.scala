@@ -1,10 +1,11 @@
 package steve
 
-/*
- * Created by TBA @ ComeOn Group!
- */
+enum Command {
+  case Build(build: steve.Build)
+  case Run(hash: Hash)
+}
 
-case class Build(
+final case class Build(
   base: Build.Base,
   commands: List[Build.Command],
 )
@@ -13,14 +14,16 @@ object Build {
 
   enum Base {
     case EmptyImage
-    case ImageHash(hash: Hash)
+    case ImageReference(hash: Hash)
   }
 
+  enum Command {
+    case Upsert(key: String, value: String)
+    case Delete(key: String)
+  }
+
+  val empty: Build = Build(Base.EmptyImage, Nil)
+
 }
 
-enum Command {
-  case Upsert(key: String, value: String)
-  case Delete(key: String)
-}
-
-case class Hash(value: Array[Byte])
+final case class Hash(value: Array[Byte])
